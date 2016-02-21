@@ -88,6 +88,10 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
     public MaterialSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs);
 
+        if (isInEditMode()) {
+            return;
+        }
+
         mContext = context;
 
         initiateView();
@@ -268,9 +272,6 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
     }
 
     private boolean isVoiceAvailable() {
-        if (isInEditMode()) {
-            return true;
-        }
         PackageManager pm = getContext().getPackageManager();
         List<ResolveInfo> activities = pm.queryIntentActivities(
                 new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
